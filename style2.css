@@ -1,5 +1,5 @@
     /* ===================================================
-       1. RESET & VARIABLES
+       1. RESET & PERFORMANCE ENGINE
        =================================================== */
     @font-face {
       font-family: 'Providence Sans Offc W00 Bold';
@@ -16,14 +16,19 @@
       --text-muted: #6e625d;
       --font-main: 'Providence Sans Offc W00 Bold', cursive, sans-serif;
       --hero-gap: -12px;
-      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-silk: cubic-bezier(0.22, 1, 0.36, 1);
     }
     *,
     *::before,
     *::after {
       box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
-    html,
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
     body,
     .app-wrapper {
       width: 100%;
@@ -33,6 +38,7 @@
       font-family: var(--font-main);
       -ms-overflow-style: none;
       scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
     }
     html::-webkit-scrollbar,
     body::-webkit-scrollbar,
@@ -50,15 +56,16 @@
       color: #ffffff;
       border: none;
       border-radius: 50px;
-      transition: all 0.3s ease;
+      transition: transform 0.3s var(--ease-silk), box-shadow 0.3s var(--ease-silk), background-color 0.3s ease;
       will-change: transform, box-shadow;
-      backface-visibility: hidden;
+      transform: translateZ(0);
     }
     .btn-theme:hover,
     .btn-theme:focus {
       background-color: var(--theme-red-hover);
       color: #ffffff;
-      box-shadow: 0 4px 12px rgba(128, 0, 0, 0.25);
+      box-shadow: 0 6px 18px rgba(128, 0, 0, 0.28);
+      transform: translateY(-2px);
     }
     .form-control:focus,
     .form-select:focus {
@@ -68,8 +75,39 @@
     .content-hidden {
       display: none;
     }
+
     /* ===================================================
-       2. APP WRAPPER & COVER SECTION
+       2. SEQUENTIAL TEXT & ELEMENT REVEAL
+       =================================================== */
+    .stagger-parent > * {
+      opacity: 0;
+      transform: translate3d(0, 20px, 0);
+      transition: opacity 0.75s var(--ease-silk), transform 0.75s var(--ease-silk);
+      will-change: opacity, transform;
+      backface-visibility: hidden;
+    }
+    .stagger-parent.revealed > *:nth-child(1) { transition-delay: 0.05s; opacity: 1; transform: translate3d(0, 0, 0); }
+    .stagger-parent.revealed > *:nth-child(2) { transition-delay: 0.16s; opacity: 1; transform: translate3d(0, 0, 0); }
+    .stagger-parent.revealed > *:nth-child(3) { transition-delay: 0.28s; opacity: 1; transform: translate3d(0, 0, 0); }
+    .stagger-parent.revealed > *:nth-child(4) { transition-delay: 0.40s; opacity: 1; transform: translate3d(0, 0, 0); }
+    .stagger-parent.revealed > *:nth-child(5) { transition-delay: 0.52s; opacity: 1; transform: translate3d(0, 0, 0); }
+    .stagger-parent.revealed > *:nth-child(6) { transition-delay: 0.64s; opacity: 1; transform: translate3d(0, 0, 0); }
+
+    .scroll-reveal {
+      opacity: 0;
+      transform: translate3d(0, 22px, 0);
+      transition: opacity 0.8s var(--ease-silk), transform 0.8s var(--ease-silk);
+      will-change: opacity, transform;
+      backface-visibility: hidden;
+      contain: layout style;
+    }
+    .scroll-reveal.revealed {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    /* ===================================================
+       3. APP WRAPPER & COVER SECTION
        =================================================== */
     .app-wrapper {
       width: 100%;
@@ -90,10 +128,11 @@
       height: 100vh;
       height: 100dvh;
       margin: 0 auto;
-      z-index: 99999;
+      z-index: 9999;
       background-color: var(--bg-cream);
       overflow: hidden;
-      transition: opacity 0.6s ease, visibility 0.6s ease;
+      transition: opacity 0.65s var(--ease-silk), visibility 0.65s var(--ease-silk);
+      transform: translateZ(0);
     }
     #cover-section.fade-out {
       opacity: 0;
@@ -142,34 +181,31 @@
       margin-right: -35px;
       position: relative;
       z-index: 2;
-      animation: popInHero 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+      animation: popInHero 1.8s var(--ease-silk) 0.1s forwards;
     }
     #cover-section .hero-2 {
       position: relative;
       z-index: 1;
-      animation: popInHero2 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+      animation: popInHero2 1.8s var(--ease-silk) 0.3s forwards;
     }
-    /* Doodle Overlays */
     .doodle-ring-overlay {
       position: absolute;
       top: -13px;
       left: -50px;
-      opacity: 0;
       max-height: clamp(65px, 7vh, 85px);
       width: auto;
       z-index: 3;
-      animation: popInRing 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s forwards,
+      animation: popInRing 0.6s var(--ease-silk) 0.2s forwards,
         swayRing 2.5s ease-in-out 0.8s infinite alternate;
     }
     .doodle-pita-overlay {
       position: absolute;
       bottom: -18px;
       right: -30px;
-      opacity: 0;
       max-height: clamp(50px, 7vh, 65px);
       width: auto;
       z-index: 3;
-      animation: popInPita 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1.4s forwards,
+      animation: popInPita 0.6s var(--ease-silk) 1.4s forwards,
         swayPita 2.5s ease-in-out 1.9s infinite alternate;
     }
     .spark-rhythm-container {
@@ -194,25 +230,25 @@
     #cover-section .spark-top-left {
       top: 10%;
       left: -8px;
-      animation: popInSpark 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1.6s both,
+      animation: popInSpark 0.5s var(--ease-silk) 1.6s both,
         floatSpark 3s ease-in-out 2.1s infinite alternate;
     }
     #cover-section .spark-top-right {
       top: 45%;
       right: -8px;
-      opacity: 0;
       transform: rotate(35deg);
-      animation: popInSparkRotated 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1.9s both,
-        floatSpark2 2.5s ease-in-out 2.4s infinite alternate;
+      animation: popInSparkRotated 0.5s var(--ease-silk) 1.9s both,
+        floatSpark 2.5s ease-in-out 2.4s infinite alternate;
     }
     #cover-section .spark-bottom-left {
       bottom: 8%;
       left: -28px;
-      animation: popInSpark 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 2.2s both,
+      animation: popInSpark 0.5s var(--ease-silk) 2.2s both,
         floatSpark 3.5s ease-in-out 2.7s infinite alternate;
     }
+
     /* ===================================================
-       3. TYPOGRAPHY & ANTI-FLICKER ANIMATIONS
+       4. TYPOGRAPHY & SMOOTH CHAR TRANSITION
        =================================================== */
     .typing-container {
       min-height: 1.2em;
@@ -230,16 +266,15 @@
     .typing-container .char {
       display: inline-block;
       opacity: 0;
-      transform: translateY(14px);
-      transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      transition-delay: calc(var(--char-index, 0) * 35ms);
+      transform: translate3d(0, 16px, 0);
+      transition: opacity 0.35s var(--ease-silk), transform 0.35s var(--ease-silk);
+      transition-delay: calc(var(--char-index, 0) * 28ms);
       will-change: transform, opacity;
       backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
     }
     .typing-container.is-active .char {
       opacity: 1;
-      transform: translateY(0);
+      transform: translate3d(0, 0, 0);
     }
     .typing-container .space {
       display: inline-block;
@@ -250,10 +285,13 @@
       height: auto;
       object-fit: contain;
     }
+    
     .hero-center {
-      min-height: 100vh;
-      min-height: 100dvh;
+      min-height: auto;
+      padding-top: 2.5rem;
+      padding-bottom: 1.5rem;
     }
+    
     .quote-title {
       font-size: clamp(3rem, 1.7333rem + 5.3333vw, 6rem);
     }
@@ -269,7 +307,6 @@
       height: auto;
       margin: 0 auto;
     }
-    /* Disco & Save the Date */
     .std-section-wrapper {
       display: flex;
       align-items: center;
@@ -280,8 +317,8 @@
       display: inline-block;
       transform-origin: 50% 0%;
       opacity: 0;
-      transform: translateY(-30px);
-      transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+      transform: translate3d(0, -30px, 0);
+      transition: opacity 0.6s var(--ease-silk), transform 0.6s var(--ease-silk);
       will-change: transform, opacity;
       backface-visibility: hidden;
     }
@@ -291,19 +328,16 @@
     .disco-wrapper.active,
     .disco-wrapper.revealed,
     .std-section-wrapper.active .disco-wrapper {
-      animation: discoDropFade 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+      animation: discoDropFade 0.9s var(--ease-silk) 0.2s forwards;
     }
     @keyframes discoDropFade {
       0% {
         opacity: 0;
-        transform: translateY(-80px) scale(0.85);
-      }
-      50% {
-        opacity: 0.8;
+        transform: translate3d(0, -70px, 0) scale(0.88);
       }
       100% {
         opacity: 1;
-        transform: translateY(0) scale(1) rotate(0deg);
+        transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
       }
     }
     .std-text-wrapper {
@@ -319,14 +353,14 @@
     .std-text-wrapper .typing-line {
       font-size: clamp(45px, 6.5vw, 95px);
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
+      transform: translate3d(0, 18px, 0);
+      transition: opacity 0.5s var(--ease-silk), transform 0.5s var(--ease-silk);
       will-change: transform, opacity;
       backface-visibility: hidden;
     }
     .std-text-wrapper.animate .typing-line {
       opacity: 1;
-      transform: translateY(0);
+      transform: translate3d(0, 0, 0);
     }
     .std-text-wrapper.animate .line-save {
       transition-delay: 0.08s;
@@ -337,7 +371,6 @@
     .std-text-wrapper.animate .line-date {
       transition-delay: 0.32s;
     }
-    /* Date SVG Scribble */
     .date-circle-container {
       position: relative !important;
       display: inline-block !important;
@@ -358,130 +391,132 @@
       stroke-linejoin: round !important;
       stroke-dasharray: 400;
       stroke-dashoffset: 400;
-      transition: stroke-dashoffset 0.7s cubic-bezier(0.45, 0, 0.15, 1) 0.15s;
+      transition: stroke-dashoffset 0.75s var(--ease-silk) 0.15s;
     }
     .date-circle-container.revealed .scribble-path {
       stroke-dashoffset: 0 !important;
     }
 
     /* ===================================================
-       NEW: LOVE STORY SECTION (VERTICAL & NO PHOTO)
+       5. LOVE STORY TIMELINE STYLE
        =================================================== */
+    .journey-tag {
+      display: inline-block;
+      background: rgba(128, 0, 0, 0.08);
+      color: var(--theme-red);
+      font-size: 0.75rem;
+      border-radius: 50px;
+      letter-spacing: 2px;
+    }
     .love-timeline {
       position: relative;
-      padding: 20px 0;
-      margin: 0 auto;
-      max-width: 440px;
+      max-width: 680px;
+      margin: 30px auto 10px auto;
+      padding: 10px 0;
     }
-    /* Garis Utama Timeline Vertikal */
     .love-timeline::before {
       content: '';
       position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 28px;
-      width: 3px;
-      background: linear-gradient(180deg, rgba(128,0,0,0.15) 0%, var(--theme-red) 15%, var(--theme-red) 85%, rgba(128,0,0,0.15) 100%);
+      top: 15px;
+      bottom: 15px;
+      left: 20px;
+      width: 2px;
+      background: linear-gradient(180deg, rgba(128, 0, 0, 0.15) 0%, var(--theme-red) 50%, rgba(128, 0, 0, 0.15) 100%);
       border-radius: 2px;
     }
     .timeline-item {
       position: relative;
       display: flex;
       align-items: flex-start;
-      margin-bottom: 32px;
-      padding-left: 65px;
-      opacity: 0;
-      transform: translateY(24px) scale(0.96);
-      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: opacity, transform;
+      margin-bottom: 28px;
+      padding-left: 54px;
     }
-    .timeline-item.revealed {
-      opacity: 1;
-      transform: translateY(0) scale(1);
+    .timeline-item:last-child {
+      margin-bottom: 0;
     }
-    /* Staggered Delay Animasi Per Item */
-    .timeline-item:nth-child(1) { transition-delay: 0.1s; }
-    .timeline-item:nth-child(2) { transition-delay: 0.25s; }
-    .timeline-item:nth-child(3) { transition-delay: 0.4s; }
-    .timeline-item:nth-child(4) { transition-delay: 0.55s; }
-
-    /* Node Lingkaran Ikon Versi Animasi Pulse */
     .timeline-dot {
       position: absolute;
-      left: 7px;
+      left: 6px;
       top: 0;
-      width: 44px;
-      height: 44px;
+      width: 30px;
+      height: 30px;
+      background: var(--theme-red);
+      color: #ffffff;
       border-radius: 50%;
-      background-color: var(--bg-cream);
-      border: 2px solid var(--theme-red);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--theme-red);
-      font-size: 1.1rem;
-      box-shadow: 0 4px 12px rgba(128, 0, 0, 0.15);
+      font-size: 0.75rem;
+      box-shadow: 0 0 0 4px var(--bg-cream), 0 4px 12px rgba(128, 0, 0, 0.25);
       z-index: 2;
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s;
+      transition: transform 0.35s var(--ease-silk), box-shadow 0.35s ease;
     }
-    .timeline-item.revealed .timeline-dot {
-      animation: dotPopPulse 2.5s ease-in-out infinite alternate;
+    .timeline-item:hover .timeline-dot {
+      transform: scale(1.15);
+      box-shadow: 0 0 0 4px var(--bg-cream), 0 6px 16px rgba(128, 0, 0, 0.4);
     }
     .timeline-content-card {
       background: #ffffff;
-      padding: 20px clamp(16px, 4vw, 22px);
       border-radius: 18px;
-      border: 1px solid rgba(128, 0, 0, 0.08);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+      padding: 18px 22px;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(128, 0, 0, 0.06);
       width: 100%;
       text-align: left;
-      position: relative;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.35s var(--ease-silk), box-shadow 0.35s ease;
     }
     .timeline-content-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 25px rgba(128, 0, 0, 0.12);
-    }
-    /* Segitiga Card Pointer */
-    .timeline-content-card::before {
-      content: '';
-      position: absolute;
-      left: -8px;
-      top: 14px;
-      width: 0;
-      height: 0;
-      border-top: 8px solid transparent;
-      border-bottom: 8px solid transparent;
-      border-right: 8px solid #ffffff;
+      box-shadow: 0 12px 28px rgba(128, 0, 0, 0.08);
     }
     .timeline-year-badge {
       display: inline-block;
-      background-color: rgba(128, 0, 0, 0.08);
+      background: rgba(128, 0, 0, 0.08);
       color: var(--theme-red);
       font-weight: 700;
-      font-size: 0.75rem;
-      letter-spacing: 1px;
-      padding: 3px 12px;
-      border-radius: 20px;
+      font-size: 0.72rem;
+      padding: 3px 10px;
+      border-radius: 30px;
       margin-bottom: 6px;
+      letter-spacing: 0.5px;
     }
-    @keyframes dotPopPulse {
-      0% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(128, 0, 0, 0.4);
+
+    /* Desktop Alternating Timeline Layout */
+    @media (min-width: 768px) {
+      .love-timeline::before {
+        left: 50%;
+        transform: translateX(-50%);
       }
-      70% {
-        transform: scale(1.08);
-        box-shadow: 0 0 0 10px rgba(128, 0, 0, 0);
+      .timeline-item {
+        padding-left: 0;
+        width: 100%;
+        margin-bottom: 35px;
       }
-      100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(128, 0, 0, 0);
+      .timeline-dot {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .timeline-item:hover .timeline-dot {
+        transform: translateX(-50%) scale(1.15);
+      }
+      .timeline-item:nth-child(odd) {
+        padding-right: calc(50% + 28px);
+        text-align: right;
+      }
+      .timeline-item:nth-child(odd) .timeline-content-card {
+        text-align: right;
+      }
+      .timeline-item:nth-child(even) {
+        padding-left: calc(50% + 28px);
+        text-align: left;
+      }
+      .timeline-item:nth-child(even) .timeline-content-card {
+        text-align: left;
       }
     }
 
     /* ===================================================
-       4. BANK CARDS & TOAST POPUP
+       6. BANK CARDS & TOAST POPUP
        =================================================== */
     .bank-card-wrapper {
       position: relative;
@@ -517,36 +552,33 @@
     .card-spacer {
       margin-bottom: clamp(1rem, 7cqw, 2.5rem);
     }
-    /* ===================================================
-       STAGGERED POP-IN GALLERY ANIMATION
-       =================================================== */
+
+    /* GALLERY GRID */
     .gallery-item-anim {
       opacity: 0;
-      transform: scale(0.65) translateY(20px);
-      transition: opacity 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
-        transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
-      transition-delay: calc(var(--item-index, 0) * 140ms);
+      transform: scale(0.85) translate3d(0, 20px, 0);
+      transition: opacity 0.65s var(--ease-silk), transform 0.65s var(--ease-silk);
+      transition-delay: calc(var(--item-index, 0) * 110ms);
       will-change: transform, opacity;
       backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
     }
     #gallery-grid.revealed .gallery-item-anim {
       opacity: 1;
-      transform: scale(1) translateY(0);
+      transform: scale(1) translate3d(0, 0, 0);
     }
     .gallery-square {
       width: 100%;
       aspect-ratio: 1/1;
       object-fit: cover;
       cursor: pointer;
-      transition: transform 0.3s;
+      transition: transform 0.35s var(--ease-silk);
     }
     .gallery-main {
       width: 100%;
       aspect-ratio: 16/9;
       object-fit: cover;
       cursor: pointer;
-      transition: transform 0.3s;
+      transition: transform 0.35s var(--ease-silk);
     }
     .gallery-square:hover,
     .gallery-main:hover {
@@ -556,6 +588,7 @@
       width: 54px;
       height: 54px;
       cursor: pointer;
+      transform: translateZ(0);
     }
     .donut-svg {
       width: 100%;
@@ -568,25 +601,11 @@
     .donut-svg.playing {
       animation-play-state: running;
     }
-    /* Scroll Reveal Transisi Stabil (Anti-Flicker) */
-    .scroll-reveal {
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
-      will-change: opacity, transform;
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-    }
-    .scroll-reveal.revealed {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    /* Custom Copy Toast Popup */
     .custom-copy-toast {
       position: fixed;
       left: 50%;
       bottom: 30px;
-      transform: translateX(-50%) translateY(25px);
+      transform: translate3d(-50%, 25px, 0);
       background: rgba(128, 0, 0, 0.95);
       color: #ffffff;
       padding: 12px 24px;
@@ -600,55 +619,159 @@
       z-index: 999999;
       opacity: 0;
       pointer-events: none;
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.4s var(--ease-silk);
       display: flex;
       align-items: center;
       white-space: nowrap;
     }
     .custom-copy-toast.show {
       opacity: 1;
-      transform: translateX(-50%) translateY(0);
+      transform: translate3d(-50%, 0, 0);
     }
-    /* Modal Gallery */
+
+    /* ===================================================
+       7. MODAL GALLERY PREVIEW (TRANSPARENT & STABLE)
+       =================================================== */
+    .modal-backdrop.show {
+      opacity: 0.88;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      background-color: rgba(12, 10, 10, 0.92);
+      z-index: 10500 !important;
+    }
+    #galleryModal {
+      z-index: 10550 !important;
+    }
+    #galleryModal .modal-dialog {
+      max-width: 100vw;
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      margin: 0;
+      padding: 0;
+    }
+    #galleryModal .modal-content {
+      background-color: transparent !important;
+      border-radius: 0 !important;
+      border: none;
+      height: 100%;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      box-shadow: none;
+    }
     .gallery-modal-card {
       position: relative;
       width: 100%;
-      aspect-ratio: 4 / 5;
-      max-height: 70dvh;
-      border-radius: 20px;
+      height: 100%;
       overflow: hidden;
-      border: 2px solid rgba(255, 255, 255, 0.4);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-      background: #000;
+      background: transparent !important;
+      touch-action: pan-y pinch-zoom;
     }
-    .gallery-modal-card #carouselGallery,
-    .gallery-modal-card .carousel-inner,
-    .gallery-modal-card .carousel-item {
+    #carouselGallery {
       width: 100%;
       height: 100%;
+      position: relative;
+      z-index: 5;
+      background: transparent;
+    }
+    #carouselGallery .carousel-inner {
+      width: 100%;
+      height: 100%;
+      background: transparent;
+    }
+    #carouselGallery .carousel-item {
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      text-align: center;
+    }
+    #carouselGallery .carousel-item.active,
+    #carouselGallery .carousel-item-next,
+    #carouselGallery .carousel-item-prev {
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+    }
+    .modal-img-natural-wrapper {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 10;
+      background: transparent;
+      padding: 0 10px;
     }
     .modal-carousel-img {
-      width: 100% !important;
-      height: 100% !important;
-      object-fit: cover !important;
+      max-width: 100vw !important;
+      max-height: 82vh !important;
+      max-height: 82dvh !important;
+      width: auto !important;
+      height: auto !important;
+      object-fit: contain !important;
+      border-radius: 0 !important;
+      transition: transform 0.35s var(--ease-silk);
+      cursor: zoom-in;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-user-drag: none;
+      filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.65));
     }
-    .gallery-close-btn {
+    .modal-carousel-img.is-zoomed {
+      transform: scale(2);
+      cursor: zoom-out;
+    }
+    .gallery-top-controls {
       position: absolute;
-      top: 12px;
-      right: 12px;
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      top: 18px;
+      right: 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 10800;
+    }
+    .gallery-ctrl-btn {
+      background: rgba(35, 25, 25, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       color: #ffffff;
-      width: 32px;
-      height: 32px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 1065;
       cursor: pointer;
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: all 0.25s var(--ease-silk);
     }
+    .gallery-ctrl-btn:hover,
+    .gallery-ctrl-btn:active {
+      background: rgba(255, 255, 255, 0.35);
+      color: #ffffff;
+      transform: scale(1.08);
+    }
+    .carousel-control-prev,
+    .carousel-control-next {
+      width: 16%;
+      z-index: 10700;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover {
+      opacity: 1;
+    }
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.8));
+      width: 2.2rem;
+      height: 2.2rem;
+    }
+
     .success-icon-wrapper {
       width: 65px;
       height: 65px;
@@ -675,8 +798,9 @@
       stroke-dashoffset: 48;
       animation: strokeCheck 0.35s cubic-bezier(0.65, 0, 0.45, 1) 0.45s forwards;
     }
+
     /* ===================================================
-       5. COUNTDOWN & POLAROID SECTION
+       8. COUNTDOWN & POLAROID SECTION
        =================================================== */
     .section.count {
       background: var(--theme-red);
@@ -732,7 +856,7 @@
       text-align: center;
       padding: 14px 10px;
       border-radius: 12px;
-      transition: transform 0.3s var(--ease), background 0.3s;
+      transition: transform 0.3s var(--ease-silk), background 0.3s;
     }
     .clock .time:hover {
       transform: translateY(-4px);
@@ -768,7 +892,7 @@
       padding: 10px 10px 22px 10px;
       border-radius: 8px;
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
-      transition: all 0.45s var(--ease);
+      transition: all 0.45s var(--ease-silk);
       cursor: pointer;
       text-decoration: none;
     }
@@ -784,7 +908,7 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.6s var(--ease);
+      transition: transform 0.6s var(--ease-silk);
     }
     .polaroid small {
       display: block;
@@ -842,8 +966,9 @@
       text-transform: uppercase;
       color: var(--text-muted);
     }
+
     /* ===================================================
-       6. RESPONSIVE DESKTOP & TABLET (≥ 768px)
+       9. RESPONSIVE DESKTOP & TABLET
        =================================================== */
     @media (min-width: 768px) {
       body {
@@ -874,11 +999,11 @@
       }
       #cover-section .hero-1 {
         max-width: clamp(200px, 22vw, 320px);
-        animation: hero1SplitSequence 2.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        animation: hero1SplitSequence 2.4s var(--ease-silk) forwards;
       }
       #cover-section .hero-2 {
         max-width: clamp(200px, 22vw, 320px);
-        animation: hero2SplitSequence 2.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        animation: hero2SplitSequence 2.4s var(--ease-silk) forwards;
       }
       .spark-rhythm-container {
         display: none;
@@ -887,8 +1012,8 @@
         max-width: 1140px;
         margin-left: auto;
         margin-right: auto;
-        padding-top: 4.5rem;
-        padding-bottom: 4.5rem;
+        padding-top: 3.5rem;
+        padding-bottom: 3.5rem;
       }
       #gallery-grid {
         display: grid;
@@ -904,7 +1029,6 @@
         aspect-ratio: 1/1;
       }
     }
-    
     @media (max-width: 991px) {
       .section.count {
         grid-template-columns: 1fr;
@@ -941,157 +1065,68 @@
         width: 145px;
       }
     }
-    /* ===================================================
-       7. KEYFRAMES
-       =================================================== */
+
+    /* KEYFRAMES */
     @keyframes spinDonut {
-      100% {
-        transform: rotate(360deg);
-      }
+      100% { transform: rotate(360deg); }
     }
     @keyframes popInHero {
-      0% {
-        opacity: 0;
-        transform: translateX(-100vw) scale(0.7);
-      }
-      100% {
-        opacity: 1;
-        transform: translateX(0) scale(1);
-      }
+      0% { opacity: 0; transform: translate3d(-100vw, 0, 0) scale(0.7); }
+      100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
     }
     @keyframes popInHero2 {
-      0% {
-        opacity: 0;
-        transform: translateX(100vw) scale(0.7);
-      }
-      100% {
-        opacity: 1;
-        transform: translateX(0) scale(1);
-      }
+      0% { opacity: 0; transform: translate3d(100vw, 0, 0) scale(0.7); }
+      100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
     }
     @keyframes popInRing {
-      0% {
-        opacity: 0;
-        transform: scale(0) rotate(-70deg);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1) rotate(-70deg);
-      }
+      0% { opacity: 0; transform: scale(0) rotate(-70deg); }
+      100% { opacity: 1; transform: scale(1) rotate(-70deg); }
     }
     @keyframes swayRing {
-      0% {
-        transform: scale(1) rotate(-70deg);
-      }
-      100% {
-        transform: scale(1) rotate(-55deg);
-      }
+      0% { transform: scale(1) rotate(-70deg); }
+      100% { transform: scale(1) rotate(-55deg); }
     }
     @keyframes popInPita {
-      0% {
-        opacity: 0;
-        transform: scale(0) rotate(30deg);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1) rotate(30deg);
-      }
+      0% { opacity: 0; transform: scale(0) rotate(30deg); }
+      100% { opacity: 1; transform: scale(1) rotate(30deg); }
     }
     @keyframes swayPita {
-      0% {
-        transform: scale(1) rotate(30deg);
-      }
-      100% {
-        transform: scale(1) rotate(15deg);
-      }
+      0% { transform: scale(1) rotate(30deg); }
+      100% { transform: scale(1) rotate(15deg); }
     }
     @keyframes floatSpark {
-      0% {
-        transform: translateY(0);
-      }
-      100% {
-        transform: translateY(-8px);
-      }
-    }
-    @keyframes floatSpark2 {
-  0% {
-    transform: translateY(0) rotate(35deg);
-  }
-  100% {
-    transform: translateY(-8px) rotate(35deg);
-  }
+      0% { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(0, -8px, 0); }
     }
     @keyframes sparkPulse {
-      0% {
-        stroke-dasharray: 0 40;
-      }
-      100% {
-        stroke-dasharray: 38 0;
-      }
+      0% { stroke-dasharray: 0 40; }
+      100% { stroke-dasharray: 38 0; }
     }
     @keyframes fadeInRhythm {
-      0% {
-        opacity: 0;
-      }
-      100% {
-        opacity: 1;
-      }
+      0% { opacity: 0; }
+      100% { opacity: 1; }
     }
     @keyframes popInSpark {
-      0% {
-        opacity: 0;
-        transform: scale(0);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
+      0% { opacity: 0; transform: scale(0); }
+      100% { opacity: 1; transform: scale(1); }
     }
     @keyframes popInSparkRotated {
-      0% {
-        opacity: 0;
-        transform: scale(0) rotate(35deg);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1) rotate(35deg);
-      }
+      0% { opacity: 0; transform: scale(0) rotate(35deg); }
+      100% { opacity: 1; transform: scale(1) rotate(35deg); }
     }
     @keyframes hero1SplitSequence {
-      0% {
-        opacity: 0;
-        transform: scale(0.3);
-      }
-      35% {
-        opacity: 1;
-        transform: scale(1);
-      }
-      100% {
-        opacity: 1;
-        transform: translateX(calc(-28vw + 30px)) scale(1.05);
-      }
+      0% { opacity: 0; transform: scale(0.3); }
+      35% { opacity: 1; transform: scale(1); }
+      100% { opacity: 1; transform: translate3d(calc(-28vw + 30px), 0, 0) scale(1.05); }
     }
     @keyframes hero2SplitSequence {
-      0% {
-        opacity: 0;
-        transform: scale(0.3);
-      }
-      35% {
-        opacity: 1;
-        transform: scale(1);
-      }
-      100% {
-        opacity: 1;
-        transform: translateX(calc(28vw - 30px)) scale(1.05);
-      }
+      0% { opacity: 0; transform: scale(0.3); }
+      35% { opacity: 1; transform: scale(1); }
+      100% { opacity: 1; transform: translate3d(calc(28vw - 30px), 0, 0) scale(1.05); }
     }
     @keyframes strokeCircle {
-      100% {
-        stroke-dashoffset: 0;
-      }
+      100% { stroke-dashoffset: 0; }
     }
     @keyframes strokeCheck {
-      100% {
-        stroke-dashoffset: 0;
-      }
+      100% { stroke-dashoffset: 0; }
     }
