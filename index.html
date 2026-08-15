@@ -18,16 +18,13 @@
   <!-- Font Custom -->
   <link href="https://db.onlinewebfonts.com/c/f36a026fd7fae583b3e2bb8a56584207?family=Providence+Sans+Offc+W00+Bold"
     rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="style2.css">
+<link rel="stylesheet" href="style2.css">
 </head>
 <body class="no-scroll">
   <div class="app-wrapper">
-    <!-- ============================================== -->
-    <!-- SECTION 1: COVER UNDANGAN                     -->
-    <!-- ============================================== -->
+    <!-- SECTION 1: COVER UNDANGAN -->
     <section id="cover-section">
       <div class="cover-content text-center">
-        <!-- Top Element -->
         <div class="cover-top">
           <img src="Images/ring.png" alt="Doodle Cincin" class="doodle-ring-overlay img-fluid mb-1">
           <div class="typing-container" id="bounce-target-1">
@@ -37,7 +34,6 @@
           </div>
           <img src="Images/pita.png" alt="Doodle Pita" class="doodle-pita-overlay img-fluid mt-1">
         </div>
-        <!-- Middle Element: Dual Hero + Sparks -->
         <div class="cover-middle w-100">
           <div class="spark-rhythm-container mx-auto">
             <svg class="spark-rhythm-svg" viewBox="-30 -10 280 110" xmlns="http://www.w3.org/2000/svg">
@@ -77,7 +73,6 @@
             <img src="Images/spark.png" alt="Spark" class="spark-img spark-bottom-left">
           </div>
         </div>
-        <!-- Bottom Element: Nama Mempelai, Tamu & Tombol -->
         <div class="cover-bottom w-100 text-center">
           <div class="typing-container my-1" id="bounce-couple">
             <div class="line couple-name fw-bolder fs-2">
@@ -105,6 +100,7 @@
         </div>
       </div>
     </section>
+
     <!-- Audio Player & Toggle Control -->
     <audio id="bg-music" loop>
       <source src="audio/Brian McKnight - Marry your daughter lyrics.mp3" type="audio/mpeg">
@@ -124,55 +120,52 @@
         <rect x="20" y="44" width="9" height="4" rx="2" fill="#ffb6b9" transform="rotate(-15 20 44)" />
       </svg>
     </button>
+
     <!-- ============================================== -->
     <!-- MAIN CONTENT                                  -->
     <!-- ============================================== -->
     <main id="main-content" class="content-hidden">
-      <!-- QUOTE SECTION -->
+      <!-- QUOTE SECTION (SECTION 1) -->
       <section
-        class="container py-5 text-center scroll-reveal d-flex flex-column justify-content-center align-items-center hero-center">
-        <div class="typing-container mb-3" id="bounce-target-2">
+        class="container text-center scroll-reveal stagger-parent d-flex flex-column justify-content-center align-items-center hero-center">
+        <div class="typing-container mb-2" id="bounce-target-2">
           <div class="line quote-title">SAVE</div>
           <div class="line quote-title">THE</div>
           <div class="line quote-title">DATE!</div>
         </div>
-        <div class="promise-container my-3 w-100 text-center">
+        <div class="promise-container my-2 w-100 text-center">
           <img src="Images/promise.svg" alt="Pinky Promise" class="promise-img img-fluid">
         </div>
-        <h3 class="couple-subtitle mt-3 fw-bold theme-red">Rexy ♥ Winda</h3>
-        <p class="quote-text mx-auto mt-3 small text-muted px-3" style="max-width: 550px;">
+        <h3 class="couple-subtitle mt-2 fw-bold theme-red">Rexy ♥ Winda</h3>
+        <p class="quote-text mx-auto mt-2 small text-muted px-3" style="max-width: 550px;">
           “Di antara tanda-tanda (kebesaran)-Nya ialah bahwa Dia menciptakan pasangan-pasangan untukmu dari (jenis)
           dirimu sendiri agar kamu cenderung dan merasa tenteram kepadanya...”
         </p>
         <p class="fw-bold small theme-red mb-0">QS Ar-Rum: 21</p>
       </section>
 
-      <!-- BRIDE & GROOM SECTION -->
-      <section class="container py-5 text-center scroll-reveal">
-        <div class="text-center my-3 px-3">
-          <img src="Images/bissmilah.svg" alt="Bismillah" class="img-fluid mb-3" style="max-width: 140px;">
-          <p class="text-muted tracking-widest fw-bold mb-3">Assalamu'alaikum Warahmatullahi Wabarakatuh</p>
-          <p class="text-muted text-center mx-auto mb-4 small" style="max-width: 460px;">
+      <!-- BRIDE & GROOM SECTION (SECTION 2) -->
+      <section class="container py-4 text-center scroll-reveal stagger-parent">
+        <div class="text-center my-2 px-3">
+          <img src="Images/bissmilah.svg" alt="Bismillah" class="img-fluid mb-2" style="max-width: 140px;">
+          <p class="text-muted tracking-widest fw-bold mb-2">Assalamu'alaikum Warahmatullahi Wabarakatuh</p>
+          <p class="text-muted text-center mx-auto mb-3 small" style="max-width: 460px;">
             Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk menghadiri
             pernikahan kami:
           </p>
         </div>
-        <h3 class="text-uppercase tracking-widest fw-bold theme-red my-4 section-heading">Bride & Groom</h3>
+        <h3 class="text-uppercase tracking-widest fw-bold theme-red my-3 section-heading">Bride & Groom</h3>
         <div class="row g-4 justify-content-center align-items-center couple-grid text-center">
-          <!-- 1. Foto Tengah -->
           <div class="col-12 col-lg-4 order-1 order-lg-2">
             <img src="Images/mainfoto.svg" alt="Rexy & Winda" class="img-fluid rounded-4 couple-photo">
           </div>
-          <!-- 2. Groom -->
           <div class="col-12 col-lg-4 order-2 order-lg-1">
             <h4 class="couple-fullName theme-red fw-bold fs-5">Rexy Hari Rafsanjani, S.Kom</h4>
             <p class="small text-muted mb-0">Putra ketiga dari <br><strong>Bapak Ahmad Gunadi & <br>Ibu Rosmaniar</strong></p>
           </div>
-          <!-- 3. Divider '&' -->
           <div class="col-12 order-3 d-lg-none my-1 mt-4">
             <h4 class="couple-divider theme-red fw-bold fs-3 mb-0">&</h4>
           </div>
-          <!-- 4. Bride -->
           <div class="col-12 col-lg-4 order-4 order-lg-3">
             <h4 class="couple-fullName theme-red fw-bold fs-5">Rhozana Winda Damaiyanti, S.Farm</h4>
             <p class="small text-muted mb-0">Putri pertama dari <br><strong>Bapak Riswanda. Bs & <br>Ibu Eni Junaini</strong></p>
@@ -180,83 +173,78 @@
         </div>
       </section>
 
-      <!-- ======================================================== -->
-      <!-- SECTION LOVE STORY (VERTIKAL, TANPA FOTO, FULL ANIMATED) -->
-      <!-- ======================================================== -->
-      <section class="container py-5 scroll-reveal" id="love-story-section">
-  <div class="text-center mb-4 px-3">
-    <span class="px-3 py-2 fw-semibold mb-2" style="letter-spacing: 2px;">OUR JOURNEY</span>
-    <h3 class="text-uppercase tracking-widest fw-bold theme-red section-heading">Love Story</h3>
-    <p class="small text-muted mx-auto mb-0" style="max-width: 420px;">
-      Setiap cerita cinta itu indah, namun cerita kami adalah favorit yang paling disyukuri.
-    </p>
-  </div>
+      <!-- LOVE STORY / OUR JOURNEY SECTION -->
+      <section class="container py-5 scroll-reveal stagger-parent" id="love-story-section">
+        <div class="text-center mb-4 px-3">
+          <span class="px-3 py-1 fw-semibold mb-2 journey-tag">OUR JOURNEY</span>
+          <h3 class="text-uppercase tracking-widest fw-bold theme-red section-heading mt-2">Love Story</h3>
+          <p class="small text-muted mx-auto mb-0" style="max-width: 420px;">
+            Setiap cerita cinta itu indah, namun cerita kami adalah favorit yang paling disyukuri.
+          </p>
+        </div>
 
-  <div class="love-timeline">
-    <!-- Momen 1 -->
-    <div class="timeline-item">
-      <div class="timeline-dot">
-        <i class="fa-solid fa-comments"></i>
-      </div>
-      <div class="timeline-content-card">
-        <span class="timeline-year-badge">2019</span>
-        <h5 class="fw-bold theme-red mb-1">Awal Pertemuan</h5>
-        <p class="small text-muted mb-0">
-          Berawal dari tegur sapa tak sengaja di masa perkuliahan. Dari obrolan sederhana, tumbuh benih rasa nyaman untuk mengenal lebih jauh.
-        </p>
-      </div>
-    </div>
+        <div class="love-timeline">
+          <!-- Momen 1 -->
+          <div class="timeline-item">
+            <div class="timeline-dot">
+              <i class="fa-solid fa-comments"></i>
+            </div>
+            <div class="timeline-content-card">
+              <span class="timeline-year-badge">2019</span>
+              <h5 class="fw-bold theme-red mb-1">Awal Pertemuan</h5>
+              <p class="small text-muted mb-0">
+                Berawal dari tegur sapa tak sengaja di masa perkuliahan. Dari obrolan sederhana, tumbuh benih rasa nyaman untuk mengenal lebih jauh.
+              </p>
+            </div>
+          </div>
 
-    <!-- Momen 2 -->
-    <div class="timeline-item">
-      <div class="timeline-dot">
-        <i class="fa-solid fa-heart"></i>
-      </div>
-      <div class="timeline-content-card">
-        <span class="timeline-year-badge">2021</span>
-        <h5 class="fw-bold theme-red mb-1">Menjalin Kasih</h5>
-        <p class="small text-muted mb-0">
-          Memutuskan untuk melangkah bersama, saling mendukung impian satu sama lain, dan belajar bertumbuh menjadi pribadi yang lebih baik.
-        </p>
-      </div>
-    </div>
+          <!-- Momen 2 -->
+          <div class="timeline-item">
+            <div class="timeline-dot">
+              <i class="fa-solid fa-heart"></i>
+            </div>
+            <div class="timeline-content-card">
+              <span class="timeline-year-badge">2021</span>
+              <h5 class="fw-bold theme-red mb-1">Menjalin Kasih</h5>
+              <p class="small text-muted mb-0">
+                Memutuskan untuk melangkah bersama, saling mendukung impian satu sama lain, dan belajar bertumbuh menjadi pribadi yang lebih baik.
+              </p>
+            </div>
+          </div>
 
-    <!-- Momen 3 -->
-    <div class="timeline-item">
-      <div class="timeline-dot">
-        <i class="fa-solid fa-ring"></i>
-      </div>
-      <div class="timeline-content-card">
-        <span class="timeline-year-badge">2025</span>
-        <h5 class="fw-bold theme-red mb-1">Lamaran (Engaged)</h5>
-        <p class="small text-muted mb-0">
-          Mengikat komitmen yang lebih mantap. Dengan restu kedua orang tua, kami mengikrarkan janji untuk melangkah ke jenjang pernikahan.
-        </p>
-      </div>
-    </div>
+          <!-- Momen 3 -->
+          <div class="timeline-item">
+            <div class="timeline-dot">
+              <i class="fa-solid fa-ring"></i>
+            </div>
+            <div class="timeline-content-card">
+              <span class="timeline-year-badge">2025</span>
+              <h5 class="fw-bold theme-red mb-1">Lamaran (Engaged)</h5>
+              <p class="small text-muted mb-0">
+                Mengikat komitmen yang lebih mantap. Dengan restu kedua orang tua, kami mengikrarkan janji untuk melangkah ke jenjang pernikahan.
+              </p>
+            </div>
+          </div>
 
-    <!-- Momen 4 -->
-    <div class="timeline-item">
-      <div class="timeline-dot">
-        <i class="fa-solid fa-dove"></i>
-      </div>
-      <div class="timeline-content-card">
-        <span class="timeline-year-badge">SEP 2026</span>
-        <h5 class="fw-bold theme-red mb-1">Menuju Pelaminan</h5>
-        <p class="small text-muted mb-0">
-          Momen yang dinantikan untuk mengikat janji suci di hadapan Allah SWT, memulai perjalanan panjang sebagai suami istri selamanya.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+          <!-- Momen 4 -->
+          <div class="timeline-item">
+            <div class="timeline-dot">
+              <i class="fa-solid fa-dove"></i>
+            </div>
+            <div class="timeline-content-card">
+              <span class="timeline-year-badge">SEP 2026</span>
+              <h5 class="fw-bold theme-red mb-1">Menuju Pelaminan</h5>
+              <p class="small text-muted mb-0">
+                Momen yang dinantikan untuk mengikat janji suci di hadapan Allah SWT, memulai perjalanan panjang sebagai suami istri selamanya.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <!-- ======================================================== -->
       <!-- 2-KOLOM: SAVE THE DATE (KIRI) & AKAD-RESEPSI-MAPS (KANAN) -->
-      <!-- ======================================================== -->
-      <section class="container py-5 scroll-reveal">
+      <section class="container py-4 scroll-reveal stagger-parent">
         <div class="row g-4 align-items-center justify-content-center">
-          <!-- SISI KIRI: DISCO, SAVE THE DATE & KALENDER -->
           <div class="col-12 col-lg-6 text-center">
             <div class="std-section-wrapper d-flex align-items-center justify-content-center gap-3 mb-3 px-2">
               <div class="disco-wrapper">
@@ -279,7 +267,6 @@
               </div>
             </div>
           </div>
-          <!-- SISI KANAN: KARTU AKAD, RESEPSI & MAPS -->
           <div class="col-12 col-lg-6 text-center">
             <div class="row g-3 justify-content-center">
               <div class="col-12">
@@ -307,12 +294,9 @@
         </div>
       </section>
 
-      <!-- ======================================================== -->
-      <!-- 2-KOLOM: UCAPAN & DOA (KIRI) & WEDDING GIFT (KANAN)      -->
-      <!-- ======================================================== -->
-      <section class="container py-5 scroll-reveal">
+      <!-- 2-KOLOM: UCAPAN & DOA (KIRI) & WEDDING GIFT (KANAN) -->
+      <section class="container py-4 scroll-reveal stagger-parent">
         <div class="row g-4 align-items-stretch justify-content-center">
-          <!-- SISI KIRI: UCAPAN & DOA (FORM + LIST) -->
           <div class="col-12 col-lg-6">
             <div class="card border-0 shadow-sm rounded-4 p-4 bg-white h-100">
               <h4 class="text-center theme-red fw-bold mb-2">Ucapan & Doa</h4>
@@ -335,18 +319,15 @@
                 <button type="submit" class="btn btn-theme w-100 rounded-pill fw-semibold py-2">Kirim Ucapan</button>
               </form>
               <hr class="my-4 text-muted opacity-25">
-              <!-- Wadah List Ucapan -->
               <div id="wishes-container" class="overflow-auto pe-1" style="max-height: 250px;"></div>
             </div>
           </div>
-          <!-- SISI KANAN: WEDDING GIFT (CARD BANK) -->
           <div class="col-12 col-lg-6 text-center d-flex flex-column justify-content-center">
             <div class="card border-0 shadow-sm rounded-4 p-4 bg-white h-100 d-flex flex-column justify-content-center">
               <h4 class="theme-red fw-bold mb-2">Wedding Gift</h4>
               <p class="small text-muted mb-4">Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Jika
                 ingin memberikan tanda kasih secara cashless, silakan transfer ke rekening berikut:</p>
               <div class="d-flex flex-column align-items-center justify-content-center w-100 gap-3">
-                <!-- Card BCA -->
                 <div class="bank-card-wrapper m-0">
                   <img src="Images/bank.svg" alt="Kartu BCA" class="bank-card-img">
                   <div class="card-overlay text-start">
@@ -365,7 +346,6 @@
                     </div>
                   </div>
                 </div>
-                <!-- Card Bank 2 -->
                 <div class="bank-card-wrapper m-0">
                   <img src="Images/bank2.svg" alt="Kartu Bank Kedua" class="bank-card-img">
                   <div class="card-overlay text-start">
@@ -390,39 +370,30 @@
         </div>
       </section>
 
-      <!-- ============================================== -->
-      <!-- GALLERY SECTION (POP-IN STAGGERED)            -->
-      <!-- ============================================== -->
+      <!-- GALLERY SECTION -->
       <section class="container py-4 text-center scroll-reveal" id="gallery-section">
         <h3 class="theme-red fw-bold mb-4 section-heading">Our Moments</h3>
         <div class="row g-2" id="gallery-grid">
           <div class="col-12 gallery-item-anim" style="--item-index: 0;">
-            <img src="Images/photo3.jpeg" class="img-fluid rounded-3 gallery-main" data-bs-toggle="modal"
-              data-bs-target="#galleryModal" data-bs-slide-to="0" alt="Moments 1">
+            <img src="Images/photo3.jpeg" class="img-fluid rounded-3 gallery-main gallery-thumb" data-index="0" alt="Moments 1">
           </div>
           <div class="col-6 gallery-item-anim" style="--item-index: 1;">
-            <img src="Images/photo2.jpeg" class="img-fluid rounded-3 gallery-square" data-bs-toggle="modal"
-              data-bs-target="#galleryModal" data-bs-slide-to="1" alt="Moments 2">
+            <img src="Images/photo2.jpeg" class="img-fluid rounded-3 gallery-square gallery-thumb" data-index="1" alt="Moments 2">
           </div>
           <div class="col-6 gallery-item-anim" style="--item-index: 2;">
-            <img src="Images/photo1.jpeg" class="img-fluid rounded-3 gallery-square" data-bs-toggle="modal"
-              data-bs-target="#galleryModal" data-bs-slide-to="2" alt="Moments 3">
+            <img src="Images/photo1.jpeg" class="img-fluid rounded-3 gallery-square gallery-thumb" data-index="2" alt="Moments 3">
           </div>
           <div class="col-6 gallery-item-anim" style="--item-index: 3;">
-            <img src="Images/photo7.jpeg" class="img-fluid rounded-3 gallery-square" data-bs-toggle="modal"
-              data-bs-target="#galleryModal" data-bs-slide-to="3" alt="Moments 4">
+            <img src="Images/photo7.jpeg" class="img-fluid rounded-3 gallery-square gallery-thumb" data-index="3" alt="Moments 4">
           </div>
           <div class="col-6 gallery-item-anim" style="--item-index: 4;">
-            <img src="Images/photo6.jpeg" class="img-fluid rounded-3 gallery-square" data-bs-toggle="modal"
-              data-bs-target="#galleryModal" data-bs-slide-to="4" alt="Moments 5">
+            <img src="Images/photo6.jpeg" class="img-fluid rounded-3 gallery-square gallery-thumb" data-index="4" alt="Moments 5">
           </div>
         </div>
       </section>
 
-      <!-- ============================================== -->
-      <!-- COUNTDOWN & POLAROID SECTION                   -->
-      <!-- ============================================== -->
-      <section class="section count scroll-reveal">
+      <!-- COUNTDOWN & POLAROID SECTION -->
+      <section class="section count scroll-reveal stagger-parent">
         <div>
           <span class="label">The Moment Is Coming</span>
           <h2>OUR BIG<br>DAY AWAITS</h2>
@@ -445,7 +416,6 @@
             </div>
           </div>
         </div>
-        <!-- POLAROID FOTO GALLERY -->
         <div class="polaroids">
           <div class="polaroid p1">
             <div class="pic">
@@ -473,17 +443,13 @@
         <strong>See You On 6.9.26</strong>
         <p>Rexy ♥ Winda <br>• Thank you for being part of our story •</p>
         <div class="footer-divider"></div>
-        <div class="made-with">
-          Made With Love
-        </div>
-        <div class="groom">
-          — Rexy —
-        </div>
+        <div class="made-with">Made With Love</div>
+        <div class="groom">— Rexy —</div>
       </footer>
     </main>
   </div>
 
-  <!-- FLOATING COPY POPUP / TOAST -->
+  <!-- FLOATING COPY TOAST -->
   <div id="copy-toast" class="custom-copy-toast">
     <i class="fa-solid fa-circle-check me-2"></i> Nomor rekening berhasil disalin!
   </div>
@@ -513,21 +479,57 @@
     </div>
   </div>
 
-  <!-- MODAL GALLERY PREVIEW -->
+  <!-- =================================================== -->
+  <!-- MODAL GALLERY PREVIEW (STABLE & ANTI-FREEZE)       -->
+  <!-- =================================================== -->
   <div class="modal fade" id="galleryModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-fullscreen">
       <div class="modal-content">
         <div class="gallery-modal-card">
-          <button type="button" class="gallery-close-btn" data-bs-dismiss="modal" aria-label="Close">✕</button>
-          <div id="carouselGallery" class="carousel slide" data-bs-touch="true">
+          <!-- Control Buttons (Pojok Kanan Atas) -->
+          <div class="gallery-top-controls">
+            <button type="button" class="gallery-ctrl-btn" id="btn-gallery-zoom" title="Zoom In/Out">
+              <i class="fa-solid fa-magnifying-glass-plus" id="zoom-icon"></i>
+            </button>
+            <button type="button" class="gallery-ctrl-btn" id="btn-gallery-fs" title="Layar Penuh">
+              <i class="fa-solid fa-expand" id="fs-icon"></i>
+            </button>
+            <button type="button" class="gallery-ctrl-btn" data-bs-dismiss="modal" aria-label="Close" title="Tutup">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
+          <!-- Carousel Container -->
+          <div id="carouselGallery" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
             <div class="carousel-inner">
-              <div class="carousel-item active"><img src="Images/photo3.jpeg" class="modal-carousel-img"
-                  alt="Moments 1"></div>
-              <div class="carousel-item"><img src="Images/photo2.jpeg" class="modal-carousel-img" alt="Moments 2"></div>
-              <div class="carousel-item"><img src="Images/photo1.jpeg" class="modal-carousel-img" alt="Moments 3"></div>
-              <div class="carousel-item"><img src="Images/photo7.jpeg" class="modal-carousel-img" alt="Moments 4"></div>
-              <div class="carousel-item"><img src="Images/photo6.jpeg" class="modal-carousel-img" alt="Moments 5"></div>
+              <div class="carousel-item active">
+                <div class="modal-img-natural-wrapper">
+                  <img src="Images/photo3.jpeg" class="modal-carousel-img" alt="Moments 1">
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="modal-img-natural-wrapper">
+                  <img src="Images/photo2.jpeg" class="modal-carousel-img" alt="Moments 2">
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="modal-img-natural-wrapper">
+                  <img src="Images/photo1.jpeg" class="modal-carousel-img" alt="Moments 3">
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="modal-img-natural-wrapper">
+                  <img src="Images/photo7.jpeg" class="modal-carousel-img" alt="Moments 4">
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="modal-img-natural-wrapper">
+                  <img src="Images/photo6.jpeg" class="modal-carousel-img" alt="Moments 5">
+                </div>
+              </div>
             </div>
+
+            <!-- Tombol Panah Geser Kiri/Kanan -->
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselGallery" data-bs-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Previous</span>
@@ -545,6 +547,6 @@
   <!-- Bootstrap 5 Bundle JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Script Undangan -->
-   <script src="script2.js"></script>
+  <script src="script2.js">  </script>
 </body>
 </html>
