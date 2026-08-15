@@ -163,7 +163,7 @@
       display: inline-block;
       margin: 0 auto;
     }
-    .heroes-wrapper {
+    /* .heroes-wrapper {
       display: flex;
       justify-content: center;
       align-items: flex-end;
@@ -187,7 +187,443 @@
       position: relative;
       z-index: 1;
       animation: popInHero2 1.8s var(--ease-silk) 0.3s forwards;
+    } */
+
+     /* =========================================================
+   HERO / COUPLE SYSTEM
+   Safari-safe positioning
+   ========================================================= */
+
+.heroes-wrapper {
+    --hero-size: clamp(200px, 22vw, 320px);
+    --hero-gap: clamp(0px, 1vw, 10px);
+
+    width: min(92vw, 720px);
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+
+    position: relative;
+    z-index: 2;
+
+    isolation: isolate;
+}
+
+
+/* =========================================================
+   SLOT
+   Posisi layout TIDAK menggunakan transform
+   ========================================================= */
+
+.hero-slot {
+    width: 100%;
+    min-width: 0;
+
+    display: flex;
+    align-items: flex-end;
+}
+
+.hero-slot-1 {
+    justify-content: flex-end;
+    padding-right: var(--hero-gap);
+}
+
+.hero-slot-2 {
+    justify-content: flex-start;
+    padding-left: var(--hero-gap);
+}
+
+
+/* =========================================================
+   VISUAL WRAPPER
+   Transform hanya digunakan untuk ANIMASI
+   ========================================================= */
+
+.hero-visual {
+    width: var(--hero-size);
+
+    flex: 0 0 var(--hero-size);
+
+    position: relative;
+
+    will-change: transform, opacity;
+
+    transform-origin: center bottom;
+
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+
+    perspective: 1000px;
+}
+
+
+/* =========================================================
+   IMAGE
+   ========================================================= */
+
+.hero-img-single {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    max-width: none;
+
+    object-fit: contain;
+
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+
+/* =========================================================
+   DEPTH
+   ========================================================= */
+
+#cover-section .hero-1 {
+    position: relative;
+    z-index: 2;
+}
+
+#cover-section .hero-2 {
+    position: relative;
+    z-index: 1;
+}
+
+
+/* =========================================================
+   ANIMATION
+   ========================================================= */
+
+/*
+   Rexy:
+   mulai dari tengah
+   kemudian bergerak ke kiri
+*/
+
+#cover-section .hero-visual-1 {
+    animation:
+        hero1SafariSafe 2.4s var(--ease-silk, cubic-bezier(.22,.61,.36,1))
+        0s both;
+}
+
+
+/*
+   Winda:
+   mulai dari tengah
+   kemudian bergerak ke kanan
+*/
+
+#cover-section .hero-visual-2 {
+    animation:
+        hero2SafariSafe 2.4s var(--ease-silk, cubic-bezier(.22,.61,.36,1))
+        0s both;
+}
+
+
+/* =========================================================
+   REXY ANIMATION
+   ========================================================= */
+
+@keyframes hero1SafariSafe {
+
+    0% {
+        opacity: 0;
+        transform:
+            translate3d(50%, 0, 0)
+            scale(0.30);
     }
+
+    35% {
+        opacity: 1;
+        transform:
+            translate3d(0, 0, 0)
+            scale(1);
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            translate3d(-6%, 0, 0)
+            scale(1.05);
+    }
+}
+
+
+/* =========================================================
+   WINDA ANIMATION
+   ========================================================= */
+
+@keyframes hero2SafariSafe {
+
+    0% {
+        opacity: 0;
+        transform:
+            translate3d(-50%, 0, 0)
+            scale(0.30);
+    }
+
+    35% {
+        opacity: 1;
+        transform:
+            translate3d(0, 0, 0)
+            scale(1);
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            translate3d(6%, 0, 0)
+            scale(1.05);
+    }
+}
+
+
+/* =========================================================
+   SAFARI / iOS RENDERING FIX
+   ========================================================= */
+
+@supports (-webkit-touch-callout: none) {
+
+    #cover-section .hero-visual {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+
+        -webkit-perspective: 1000px;
+        perspective: 1000px;
+    }
+
+    #cover-section .hero-img-single {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767.98px) {
+
+    .heroes-wrapper {
+        --hero-size: clamp(145px, 42vw, 205px);
+        --hero-gap: 0px;
+
+        width: min(96vw, 430px);
+
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .hero-slot-1 {
+        padding-right: 0;
+    }
+
+    .hero-slot-2 {
+        padding-left: 0;
+    }
+
+    #cover-section .hero-visual-1 {
+        animation-name: hero1Mobile;
+    }
+
+    #cover-section .hero-visual-2 {
+        animation-name: hero2Mobile;
+    }
+}
+
+
+/* =========================================================
+   MOBILE ANIMATION
+   ========================================================= */
+
+@keyframes hero1Mobile {
+
+    0% {
+        opacity: 0;
+        transform:
+            translate3d(48%, 0, 0)
+            scale(0.30);
+    }
+
+    35% {
+        opacity: 1;
+        transform:
+            translate3d(0, 0, 0)
+            scale(1);
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            translate3d(18%, 0, 0)
+            scale(1.03);
+    }
+}
+
+
+@keyframes hero2Mobile {
+
+    0% {
+        opacity: 0;
+        transform:
+            translate3d(-48%, 0, 0)
+            scale(0.30);
+    }
+
+    35% {
+        opacity: 1;
+        transform:
+            translate3d(0, 0, 0)
+            scale(1);
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            translate3d(-20%, 0, 0)
+            scale(1.03);
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONE
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .heroes-wrapper {
+        --hero-size: clamp(132px, 43vw, 170px);
+        width: 96vw;
+    }
+
+    @keyframes hero1Mobile {
+
+        0% {
+            opacity: 0;
+            transform:
+                translate3d(45%, 0, 0)
+                scale(0.30);
+        }
+
+        35% {
+            opacity: 1;
+            transform:
+                translate3d(0, 0, 0)
+                scale(1);
+        }
+
+        100% {
+            opacity: 1;
+            transform:
+                translate3d(-3%, 0, 0)
+                scale(1.02);
+        }
+    }
+
+    @keyframes hero2Mobile {
+
+        0% {
+            opacity: 0;
+            transform:
+                translate3d(-45%, 0, 0)
+                scale(0.30);
+        }
+
+        35% {
+            opacity: 1;
+            transform:
+                translate3d(0, 0, 0)
+                scale(1);
+        }
+
+        100% {
+            opacity: 1;
+            transform:
+                translate3d(3%, 0, 0)
+                scale(1.02);
+        }
+    }
+}
+
+
+/* =========================================================
+   DESKTOP
+   ========================================================= */
+
+@media (min-width: 768px) {
+
+    .heroes-wrapper {
+        --hero-size: clamp(200px, 22vw, 320px);
+
+        width: min(92vw, 720px);
+    }
+
+    #cover-section .hero-visual-1 {
+        animation-name: hero1Desktop;
+    }
+
+    #cover-section .hero-visual-2 {
+        animation-name: hero2Desktop;
+    }
+}
+
+
+@keyframes hero1Desktop {
+
+    0% {
+        opacity: 0;
+        transform:
+            translate3d(50%, 0, 0)
+            scale(0.30);
+    }
+
+    35% {
+        opacity: 1;
+        transform:
+            translate3d(0, 0, 0)
+            scale(1);
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            translate3d(-6%, 0, 0)
+            scale(1.05);
+    }
+}
+
+
+@keyframes hero2Desktop {
+
+    0% {
+        opacity: 0;
+        transform:
+            translate3d(-50%, 0, 0)
+            scale(0.30);
+    }
+
+    35% {
+        opacity: 1;
+        transform:
+            translate3d(0, 0, 0)
+            scale(1);
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            translate3d(6%, 0, 0)
+            scale(1.05);
+    }
+}
     .doodle-ring-overlay {
       position: absolute;
       top: -13px;
@@ -220,7 +656,7 @@
       stroke-linecap: round;
       animation: sparkPulse calc(var(--dur) * 1.2) ease-in-out infinite alternate calc(var(--delay) * 1.2);
     }
-    .spark-img {
+    /* .spark-img {
       position: absolute;
       width: 32px;
       height: auto;
@@ -245,7 +681,250 @@
       left: -28px;
       animation: popInSpark 0.5s var(--ease-silk) 2.2s both,
         floatSpark 3.5s ease-in-out 2.7s infinite alternate;
+    } */
+
+    /* =========================================================
+   SPARK
+   ========================================================= */
+
+.spark-img {
+    position: absolute;
+
+    width: 32px;
+    height: auto;
+
+    pointer-events: none;
+
+    z-index: 4;
+
+    display: block;
+
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+
+    will-change: transform, opacity;
+}
+
+
+/* =========================================================
+   TOP LEFT
+   ========================================================= */
+
+#cover-section .spark-top-left {
+
+    top: 10%;
+    left: 68px;
+
+    animation:
+        sparkAppearLeft 0.5s var(--ease-silk, ease) 1.6s both,
+        sparkFloatLeft 3s ease-in-out 2.1s infinite alternate;
+}
+
+
+/* =========================================================
+   TOP RIGHT
+   ========================================================= */
+
+#cover-section .spark-top-right {
+
+    top: 45%;
+    right: 68px;
+
+    animation:
+        sparkAppearRight 0.5s var(--ease-silk, ease) 1.9s both,
+        sparkFloatRight 2.5s ease-in-out 2.4s infinite alternate;
+}
+
+
+/* =========================================================
+   BOTTOM LEFT
+   ========================================================= */
+
+#cover-section .spark-bottom-left {
+
+    bottom: 8%;
+    left: 28px;
+
+    animation:
+        sparkAppearBottom 0.5s var(--ease-silk, ease) 2.2s both,
+        sparkFloatBottom 3.5s ease-in-out 2.7s infinite alternate;
+}
+
+
+/* =========================================================
+   APPEAR
+   ========================================================= */
+
+@keyframes sparkAppearLeft {
+
+    0% {
+        opacity: 0;
+        transform:
+            translate3d(-80, 0, 0)
+            scale(0);
     }
+
+    100% {
+        opacity: 1;
+        transform:
+            translate3d(180, 0, 0)
+            scale(1);
+    }
+}
+
+
+@keyframes sparkAppearRight {
+
+    0% {
+        opacity: 0;
+        transform:
+            translate3d(0, 0, 0)
+            rotate(35deg)
+            scale(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            translate3d(0, 0, 0)
+            rotate(35deg)
+            scale(1);
+    }
+}
+
+
+@keyframes sparkAppearBottom {
+
+    0% {
+        opacity: 0;
+        transform:
+            translate3d(0, 0, 0)
+            scale(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            translate3d(0, 0, 0)
+            scale(1);
+    }
+}
+
+
+/* =========================================================
+   FLOAT
+   ========================================================= */
+
+@keyframes sparkFloatLeft {
+
+    0% {
+        transform:
+            translate3d(0, 0, 0)
+            scale(1);
+    }
+
+    100% {
+        transform:
+            translate3d(0, -8px, 0)
+            scale(1);
+    }
+}
+
+
+@keyframes sparkFloatRight {
+
+    0% {
+        transform:
+            translate3d(0, 0, 0)
+            rotate(35deg)
+            scale(1);
+    }
+
+    100% {
+        transform:
+            translate3d(0, -8px, 0)
+            rotate(35deg)
+            scale(1);
+    }
+}
+
+
+@keyframes sparkFloatBottom {
+
+    0% {
+        transform:
+            translate3d(0, 0, 0)
+            scale(1);
+    }
+
+    100% {
+        transform:
+            translate3d(0, -8px, 0)
+            scale(1);
+    }
+}
+
+/* =========================================================
+   iPHONE / iOS SAFARI
+   ========================================================= */
+
+@supports (-webkit-touch-callout: none) {
+
+    html {
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+    }
+
+    body {
+        -webkit-font-smoothing: antialiased;
+    }
+
+    #cover-section {
+        min-height: 100svh;
+        min-height: 100dvh;
+
+        padding-left:
+            env(safe-area-inset-left);
+
+        padding-right:
+            env(safe-area-inset-right);
+
+        padding-top:
+            env(safe-area-inset-top);
+
+        padding-bottom:
+            env(safe-area-inset-bottom);
+    }
+
+    .cover-content {
+        width: 100%;
+        max-width: 100%;
+
+        box-sizing: border-box;
+    }
+
+    .heroes-wrapper {
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
+    }
+
+    .hero-visual {
+        transform-origin: center bottom;
+        -webkit-transform-origin: center bottom;
+
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+    }
+
+    .hero-img-single {
+        display: block;
+
+        max-width: none;
+
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
+    }
+}
 
     /* ===================================================
        4. TYPOGRAPHY & SMOOTH CHAR TRANSITION
@@ -997,14 +1676,14 @@
         width: 100%;
         pointer-events: none;
       }
-      #cover-section .hero-1 {
+      /* #cover-section .hero-1 {
         max-width: clamp(200px, 22vw, 320px);
         animation: hero1SplitSequence 2.4s var(--ease-silk) forwards;
       }
       #cover-section .hero-2 {
         max-width: clamp(200px, 22vw, 320px);
         animation: hero2SplitSequence 2.4s var(--ease-silk) forwards;
-      }
+      } */
       .spark-rhythm-container {
         display: none;
       }
@@ -1070,14 +1749,14 @@
     @keyframes spinDonut {
       100% { transform: rotate(360deg); }
     }
-    @keyframes popInHero {
+    /* @keyframes popInHero {
       0% { opacity: 0; transform: translate3d(-100vw, 0, 0) scale(0.7); }
       100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
     }
     @keyframes popInHero2 {
       0% { opacity: 0; transform: translate3d(100vw, 0, 0) scale(0.7); }
       100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
-    }
+    } */
     @keyframes popInRing {
       0% { opacity: 0; transform: scale(0) rotate(-70deg); }
       100% { opacity: 1; transform: scale(1) rotate(-70deg); }
@@ -1114,7 +1793,7 @@
       0% { opacity: 0; transform: scale(0) rotate(35deg); }
       100% { opacity: 1; transform: scale(1) rotate(35deg); }
     }
-    @keyframes hero1SplitSequence {
+    /* @keyframes hero1SplitSequence {
       0% { opacity: 0; transform: scale(0.3); }
       35% { opacity: 1; transform: scale(1); }
       100% { opacity: 1; transform: translate3d(calc(-28vw + 30px), 0, 0) scale(1.05); }
@@ -1123,7 +1802,7 @@
       0% { opacity: 0; transform: scale(0.3); }
       35% { opacity: 1; transform: scale(1); }
       100% { opacity: 1; transform: translate3d(calc(28vw - 30px), 0, 0) scale(1.05); }
-    }
+    } */
     @keyframes strokeCircle {
       100% { stroke-dashoffset: 0; }
     }
