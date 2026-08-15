@@ -1,7 +1,5 @@
-
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxCrC7exTwOwC9WMUTnUPKlyhow7iXqIHmHvdKl14k4E4RDTqTaZs9MzO3fkyq1ee6Wlg/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxCrC7exTwOwC9WMUTnUPKlyhow7iXqIHmHvdKl14k4E4RDTqTaZs9MzO3fkyq1ee6Wlg/exec";
     document.addEventListener("DOMContentLoaded", () => {
-      // 1. Parameter URL untuk Nama Tamu (?to=Nama+Tamu) & AUTO-FILL RSVP FORM
       const urlParams = new URLSearchParams(window.location.search);
       const guestParam = urlParams.get('to');
       if (guestParam) {
@@ -12,7 +10,7 @@
           rsvpNameInput.value = guestParam;
         }
       }
-      // 2. Pre-Build Karakter Bounce Typing (Mencegah Layout Collapse / Flicker)
+
       function setupTypingContainers() {
         const containers = document.querySelectorAll(".typing-container");
         containers.forEach(container => {
@@ -39,14 +37,12 @@
         });
       }
       setupTypingContainers();
-      // Jalankan animasi awal pada cover
       setTimeout(() => {
         document.getElementById("bounce-target-1")?.classList.add("is-active");
         document.getElementById("bounce-couple")?.classList.add("is-active");
         document.getElementById("bounce-guest")?.classList.add("is-active");
       }, 100);
 
-      // 3. Tombol Buka Undangan & Music Control
       const coverSection = document.getElementById("cover-section");
       const openBtn = document.getElementById("btn-open-invitation");
       const mainContent = document.getElementById("main-content");
@@ -60,7 +56,7 @@
           if (musicControl) musicControl.classList.remove("d-none");
           if (coverSection) {
             coverSection.classList.add("fade-out");
-            setTimeout(() => { coverSection.style.display = "none"; }, 600);
+            setTimeout(() => { coverSection.style.display = "none"; }, 650);
           }
           document.body.classList.remove("no-scroll");
           window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -88,7 +84,6 @@
         });
       }
 
-      // 4. Countdown Timer (Target: 6 September 2026 08:00 WIB)
       const eventDate = new Date("September 6, 2026 08:00:00").getTime();
       setInterval(() => {
         const now = new Date().getTime();
@@ -101,52 +96,52 @@
         }
       }, 1000);
 
-      // 5. Scroll Observer dengan Hysteresis (Deadband) Anti-Kedip & Animasi Timeline Love Story
       const scrollObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           const target = entry.target;
           if (entry.isIntersecting && entry.intersectionRatio >= 0.12) {
-            target.classList.add('revealed', 'active');
-            if (target.classList.contains('std-text-wrapper')) {
-              target.classList.add('animate');
-            }
-            const galleryGrid = target.querySelector('#gallery-grid') || (target.id === 'gallery-grid' ? target : null);
-            if (galleryGrid) galleryGrid.classList.add('revealed');
-            const typingContainers = target.querySelectorAll('.typing-container');
-            typingContainers.forEach(tc => tc.classList.add("is-active"));
-            const disco = target.querySelector('.disco-wrapper') || (target.classList.contains('disco-wrapper') ? target : null);
-            if (disco) disco.classList.add('revealed');
-            const dateCircle = target.querySelector('.date-circle-container') || (target.classList.contains('date-circle-container') ? target : null);
-            if (dateCircle) dateCircle.classList.add('revealed');
+            requestAnimationFrame(() => {
+              target.classList.add('revealed', 'active');
+              if (target.classList.contains('std-text-wrapper')) {
+                target.classList.add('animate');
+              }
+              const galleryGrid = target.querySelector('#gallery-grid') || (target.id === 'gallery-grid' ? target : null);
+              if (galleryGrid) galleryGrid.classList.add('revealed');
+              const typingContainers = target.querySelectorAll('.typing-container');
+              typingContainers.forEach(tc => tc.classList.add("is-active"));
+              const disco = target.querySelector('.disco-wrapper') || (target.classList.contains('disco-wrapper') ? target : null);
+              if (disco) disco.classList.add('revealed');
+              const dateCircle = target.querySelector('.date-circle-container') || (target.classList.contains('date-circle-container') ? target : null);
+              if (dateCircle) dateCircle.classList.add('revealed');
+            });
           } else if (!entry.isIntersecting || entry.intersectionRatio <= 0.02) {
-            target.classList.remove('revealed', 'active');
-            if (target.classList.contains('std-text-wrapper')) {
-              target.classList.remove('animate');
-            }
-            const galleryGrid = target.querySelector('#gallery-grid') || (target.id === 'gallery-grid' ? target : null);
-            if (galleryGrid) galleryGrid.classList.remove('revealed');
-            const typingContainers = target.querySelectorAll('.typing-container');
-            typingContainers.forEach(tc => tc.classList.remove("is-active"));
-            const disco = target.querySelector('.disco-wrapper') || (target.classList.contains('disco-wrapper') ? target : null);
-            if (disco) disco.classList.remove('revealed');
-            const dateCircle = target.querySelector('.date-circle-container') || (target.classList.contains('date-circle-container') ? target : null);
-            if (dateCircle) dateCircle.classList.remove('revealed');
+            requestAnimationFrame(() => {
+              target.classList.remove('revealed', 'active');
+              if (target.classList.contains('std-text-wrapper')) {
+                target.classList.remove('animate');
+              }
+              const galleryGrid = target.querySelector('#gallery-grid') || (target.id === 'gallery-grid' ? target : null);
+              if (galleryGrid) galleryGrid.classList.remove('revealed');
+              const typingContainers = target.querySelectorAll('.typing-container');
+              typingContainers.forEach(tc => tc.classList.remove("is-active"));
+              const disco = target.querySelector('.disco-wrapper') || (target.classList.contains('disco-wrapper') ? target : null);
+              if (disco) disco.classList.remove('revealed');
+              const dateCircle = target.querySelector('.date-circle-container') || (target.classList.contains('date-circle-container') ? target : null);
+              if (dateCircle) dateCircle.classList.remove('revealed');
+            });
           }
         });
       }, {
         rootMargin: "0px",
-        threshold: [0.01, 0.06, 0.12, 0.2]
+        threshold: [0.01, 0.08, 0.14, 0.2]
       });
 
-      // Mengamati elemen scroll reveal dan tiap item timeline love story
-      document.querySelectorAll('.scroll-reveal, .std-section-wrapper, .date-circle-container, .disco-wrapper, .std-text-wrapper, #gallery-section, .timeline-item')
+      document.querySelectorAll('.scroll-reveal, .std-section-wrapper, .date-circle-container, .disco-wrapper, .std-text-wrapper, #gallery-section, #love-story-section')
         .forEach(el => scrollObserver.observe(el));
 
-      // 6. Muat Ucapan
       loadWishes();
     });
 
-    // Format Waktu Ucapan
     function formatDate(rawDate) {
       if (!rawDate) return "Baru saja";
       const date = new Date(rawDate);
@@ -161,7 +156,6 @@
         });
     }
 
-    // 7. Salin Nomor Rekening + Popup Toast
     let toastTimer;
     function copyRekening(accNo, btn) {
       navigator.clipboard.writeText(accNo).then(() => {
@@ -179,7 +173,6 @@
       });
     }
 
-    // 8. Load Data RSVP Google Sheets (GET)
     async function loadWishes() {
       const wishesContainer = document.getElementById("wishes-container");
       if (!wishesContainer) return;
@@ -221,7 +214,6 @@
       }
     }
 
-    // 9. Kirim Data Ucapan Form (POST)
     const rsvpForm = document.getElementById("rsvp-form");
     if (rsvpForm) {
       rsvpForm.addEventListener("submit", async function (e) {
@@ -277,3 +269,143 @@
         }
       });
     }
+
+    // ===================================================
+    // MODAL GALLERY ENGINE (ANTI-FREEZE & SMOOTH SWIPE)
+    // ===================================================
+    const galleryModalEl = document.getElementById('galleryModal');
+    const galleryModal = new bootstrap.Modal(galleryModalEl);
+    const carouselEl = document.getElementById('carouselGallery');
+    const bsCarousel = new bootstrap.Carousel(carouselEl, {
+      interval: false,
+      wrap: true,
+      touch: false
+    });
+
+    const zoomBtn = document.getElementById('btn-gallery-zoom');
+    const zoomIcon = document.getElementById('zoom-icon');
+    const fsBtn = document.getElementById('btn-gallery-fs');
+    const fsIcon = document.getElementById('fs-icon');
+
+    let isZoomed = false;
+
+    function resetZoom() {
+      isZoomed = false;
+      document.querySelectorAll('.modal-carousel-img').forEach(img => {
+        img.classList.remove('is-zoomed');
+      });
+      if (zoomIcon) {
+        zoomIcon.className = 'fa-solid fa-magnifying-glass-plus';
+      }
+    }
+
+    function toggleZoom(e) {
+      if (e) e.stopPropagation();
+      const activeImg = carouselEl.querySelector('.carousel-item.active .modal-carousel-img');
+      if (!activeImg) return;
+
+      isZoomed = !isZoomed;
+      if (isZoomed) {
+        activeImg.classList.add('is-zoomed');
+        if (zoomIcon) zoomIcon.className = 'fa-solid fa-magnifying-glass-minus';
+      } else {
+        activeImg.classList.remove('is-zoomed');
+        if (zoomIcon) zoomIcon.className = 'fa-solid fa-magnifying-glass-plus';
+      }
+    }
+
+    if (zoomBtn) {
+      zoomBtn.addEventListener('click', toggleZoom);
+    }
+
+    document.querySelectorAll('.modal-carousel-img').forEach(img => {
+      img.addEventListener('click', toggleZoom);
+    });
+
+    document.querySelectorAll('.gallery-thumb').forEach(thumb => {
+      thumb.addEventListener('click', function () {
+        const targetIndex = parseInt(this.getAttribute('data-index')) || 0;
+        const items = carouselEl.querySelectorAll('.carousel-item');
+        
+        items.forEach((item, idx) => {
+          if (idx === targetIndex) {
+            item.classList.add('active');
+          } else {
+            item.classList.remove('active');
+          }
+        });
+
+        resetZoom();
+        galleryModal.show();
+      });
+    });
+
+    carouselEl.addEventListener('slide.bs.carousel', resetZoom);
+    galleryModalEl.addEventListener('hidden.bs.modal', () => {
+      resetZoom();
+      if (document.fullscreenElement) {
+        document.exitFullscreen().catch(() => {});
+      }
+    });
+
+    if (fsBtn) {
+      fsBtn.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+          if (galleryModalEl.requestFullscreen) {
+            galleryModalEl.requestFullscreen();
+          } else if (galleryModalEl.webkitRequestFullscreen) {
+            galleryModalEl.webkitRequestFullscreen();
+          }
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          }
+        }
+      });
+    }
+
+    document.addEventListener('fullscreenchange', () => {
+      if (document.fullscreenElement) {
+        if (fsIcon) fsIcon.className = 'fa-solid fa-compress';
+      } else {
+        if (fsIcon) fsIcon.className = 'fa-solid fa-expand';
+      }
+    });
+
+    // SWIPE ENGINE NATIVE
+    let startX = 0;
+    let startY = 0;
+    let endX = 0;
+    let endY = 0;
+
+    carouselEl.addEventListener('touchstart', function(e) {
+      if (isZoomed) return;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      endX = startX;
+      endY = startY;
+    }, { passive: true });
+
+    carouselEl.addEventListener('touchmove', function(e) {
+      if (isZoomed) return;
+      endX = e.touches[0].clientX;
+      endY = e.touches[0].clientY;
+    }, { passive: true });
+
+    carouselEl.addEventListener('touchend', function() {
+      if (isZoomed) return;
+      const diffX = endX - startX;
+      const diffY = endY - startY;
+
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 35) {
+        if (diffX < 0) {
+          bsCarousel.next();
+        } else {
+          bsCarousel.prev();
+        }
+      }
+      startX = 0;
+      startY = 0;
+      endX = 0;
+      endY = 0;
+    });
